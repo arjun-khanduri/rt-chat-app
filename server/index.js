@@ -8,7 +8,7 @@ const router = require('./router');
 
 corsOptions = {
     cors: true,
-    origins: ["http://localhost:3001"],
+    origins: ['http://localhost:3001']
 }
 
 
@@ -18,6 +18,11 @@ const io = socketio(server, corsOptions);
 
 io.on('connect', (socket) => {
     console.log('We have a new connection');
+
+    socket.on('join', ({ name, room }, callback) => {
+        console.log(name, room);
+    });
+
     socket.on('disconnect', () => {
         console.log('User has left');
     })
