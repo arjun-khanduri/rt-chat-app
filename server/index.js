@@ -6,11 +6,17 @@ const PORT = process.env.PORT || 3000;
 
 const router = require('./router');
 
+corsOptions = {
+    cors: true,
+    origins: ["http://localhost:3001"],
+}
+
+
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, corsOptions);
 
-io.on('connection', (socket) => {
+io.on('connect', (socket) => {
     console.log('We have a new connection');
     socket.on('disconnect', () => {
         console.log('User has left');
