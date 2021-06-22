@@ -7,11 +7,13 @@ const addUser = ({ id, name, room }) => {
     const existingUser = users.find(user => user.room === room && user.name === name);
 
     if (existingUser) {
-        return { err: 'User already exists' };
+        return { error: 'User already exists' };
     }
 
     const user = { id, name, room };
     users.push(user);
+
+    return { user }; 
 }
 
 const removeUser = (id) => {
