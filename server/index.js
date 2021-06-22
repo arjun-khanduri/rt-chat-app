@@ -1,6 +1,7 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
+const cors = require('cors');
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users.js');
 
@@ -18,13 +19,18 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server, corsOptions);
 
+app.use(cors());
+app.use(router);
+server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
+
+
 io.on('connect', (socket) => {
     // console.log('We have a new connection');
 
     socket.on('join', ({ name, room }, callback) => {
-        const { err, user } = addUser({ id: socket.id, name, room });
-        if (err)
-            return callback(err);
+        const { error, user } = addUser({ id: socket.id, name, room });
+        if (error)
+            return callback(error);
         socket.emit('message', { user: 'admin', text: `${user.name}, Welcome to the room ${user.room}` });
         socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined the chat` });
         socket.join(user.room);
@@ -41,6 +47,3 @@ io.on('connect', (socket) => {
         console.log('User has left');
     })
 });
-
-app.use(router);
-server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
