@@ -16,7 +16,8 @@ const Chat = () => {
     useEffect(() => {
         const { name, room } = queryString.parse(window.location.search);
         socket = io(ENDPOINT);
-
+        setName(name);
+        setRoom(room);
         socket.emit('join', { name, room }, () => {
 
         });
@@ -50,7 +51,7 @@ const Chat = () => {
     return (
         <div className='outerContainer'>
             <div className='container'>
-                <InfoBar room={() => this.getRoom()} />
+                <InfoBar room={room} />
                 <input value={message}
                     className="messageBox"
                     onChange={(event) => setMessage(event.target.value)}
