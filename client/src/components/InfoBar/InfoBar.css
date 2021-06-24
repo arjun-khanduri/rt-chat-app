@@ -28,6 +28,6 @@
 }
 
 .infoBar:hover {
-    background: #2979FF;
+    background: rgb(189, 42, 42);
     transition: 0.3s;
 }
