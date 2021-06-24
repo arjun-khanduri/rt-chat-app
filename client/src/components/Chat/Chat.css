@@ -17,13 +17,6 @@
     color: white;
 }
 
-.messageBox {
-    border-radius: 8px;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-}
-
 @media (min-width: 320px) and (max-width: 480px) {
     .outerContainer {
         height: 100%;
