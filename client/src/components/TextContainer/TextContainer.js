@@ -1,5 +1,6 @@
 import React from 'react';
 import onlineIcon from '../../icons/onlineIcon.png';
+import './TextContainer.css';
 
 const TextContainer = ({ users }) => (
     <div className="textContainer">
@@ -7,7 +8,7 @@ const TextContainer = ({ users }) => (
             users
                 ? (
                     <div>
-                        <h3>Active in the room:</h3>
+                        <h3>Users active in the room:</h3>
                         <div className='activeContainer'>
                             <h2>
                                 {users.map(({name}) => (
