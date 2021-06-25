@@ -5,11 +5,13 @@ import io from 'socket.io-client';
 import './Chat.css';
 import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
+import Messages from '../Messages/Messages';
 
 let socket;
 
 const Chat = () => {
     const [room, setRoom] = useState('');
+    // eslint-disable-next-line
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -27,7 +29,7 @@ const Chat = () => {
             socket.emit('disconnect');
             socket.off();
         }
-
+        // eslint-disable-next-line
     }, [ENDPOINT, window.location.search]);
 
     useEffect(() => {
@@ -53,7 +55,8 @@ const Chat = () => {
         <div className='outerContainer'>
             <div className='container'>
                 <InfoBar room={room} />
-                <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
+                <Messages messages={messages} name={name} />
+                <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
         </div >
     )
