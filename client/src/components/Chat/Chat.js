@@ -16,7 +16,7 @@ const Chat = () => {
     const [users, setUsers] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    const ENDPOINT = 'localhost:8000';
+    const ENDPOINT = 'https://arjun-khanduri-rt-chat-server.herokuapp.com/';
     useEffect(() => {
         const { name, room } = queryString.parse(window.location.search);
         socket = io(ENDPOINT);
@@ -25,7 +25,7 @@ const Chat = () => {
         socket.emit('join', { name, room }, (error) => {
             if (error) {
                 alert(error);
-                window.location = '/';
+                window.location = 'https://arjun-khanduri-rt-chat-client.herokuapp.com/';
             }
         });
 
@@ -57,7 +57,7 @@ const Chat = () => {
             socket.emit('sendMessage', message, () => setMessage(''));
     }
 
-    console.log(message, messages);
+    // console.log(message, messages);
 
 
     return (
